@@ -10,7 +10,10 @@ export function SiteHeader() {
           DEV
         </Link>
         <Link href="/profil" className={styles.profileLink} aria-label="Profil">
-          ⊙
+          <span className={styles.avatar} aria-hidden="true">
+            <span className={styles.avatarHead} />
+            <span className={styles.avatarBody} />
+          </span>
         </Link>
       </div>
     </header>

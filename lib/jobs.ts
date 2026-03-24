@@ -269,6 +269,28 @@ export const getTechnologyCloud = async () => {
     }
   }
 
+  if (counts.size === 0 && repositoryName) {
+    try {
+      const client = createClient();
+      const tagDocs = await client.getAllByType('tag');
+
+      for (const doc of tagDocs) {
+        const data = (doc.data as Record<string, unknown>) ?? {};
+        const tagName = asText(data.tag_name) || asText(data.title) || doc.uid || '';
+        const cleanName = tagName.trim();
+
+        if (!cleanName) {
+          continue;
+        }
+
+        // Keep tags visible on homepage even if offers are not linked yet.
+        counts.set(cleanName, counts.get(cleanName) ?? 1);
+      }
+    } catch (error) {
+      console.error('Unable to fetch tag documents from Prismic:', error);
+    }
+  }
+
   return Array.from(counts.entries())
     .map(([name, count]) => ({
       name,

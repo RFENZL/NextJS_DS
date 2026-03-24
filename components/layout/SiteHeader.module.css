@@ -30,12 +30,47 @@
 }
 
 .profileLink {
-  color: #d7e2ff;
-  font-size: 1.3rem;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #6f8dd7;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a2b68;
 }
 
 .profileLink:hover {
-  color: #ffffff;
+  background: #233678;
+}
+
+.avatar {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.avatarHead {
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  width: 6px;
+  height: 6px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #e9f0ff;
+}
+
+.avatarBody {
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  width: 12px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 7px 7px 5px 5px;
+  background: #e9f0ff;
 }
 
 @media (max-width: 700px) {
