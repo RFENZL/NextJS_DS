@@ -1,5 +1,4 @@
-import { SliceZone } from '@prismicio/react';
-import { components } from '@/slices';
+import * as prismic from '@prismicio/client';
 import { createClient, repositoryName } from '@/prismicio';
 import styles from './page.module.css';
 
@@ -15,21 +14,33 @@ export default async function PrismicPage() {
 
   try {
     const client = createClient();
-    const pages = await client.getAllByType('page', { pageSize: 1 });
-    const page = pages[0];
-    const data = (page?.data as Record<string, unknown>) ?? {};
-    const slices = (data.slices as any[]) ?? [];
+    const docs = await client.getAllByType('mention_legale', { pageSize: 1 });
+    const doc = docs[0];
+    const data = (doc?.data as Record<string, unknown>) ?? {};
+    const title =
+      (typeof data.title === 'string' && data.title) ||
+      prismic.asText((data.title as prismic.RichTextField) ?? []) ||
+      'Mentions legales';
+    const content = (data.content as prismic.RichTextField) ?? [];
 
     return (
       <main className={styles.page}>
-        <SliceZone slices={slices} components={components} />
+        <h1>{title}</h1>
+        <div>
+          {prismic.asText(content)
+            .split('\n')
+            .filter(Boolean)
+            .map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+        </div>
       </main>
     );
   } catch {
     return (
       <main className={styles.page}>
         <h1>Document Prismic introuvable</h1>
-        <p>Cree un type page avec un champ Slice Zone nomme slices puis publie un document.</p>
+        <p>Cree et publie un document mention_legale dans Prismic.</p>
       </main>
     );
   }
