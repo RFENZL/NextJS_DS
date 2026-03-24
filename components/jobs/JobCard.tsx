@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { JobOffer } from '@/lib/jobs';
+import { FavoriteButton } from './FavoriteButton';
 import styles from './JobCard.module.css';
 
 type JobCardProps = {
@@ -23,11 +24,7 @@ export function JobCard({ offer }: JobCardProps) {
         <h3 className={styles.title}>
           <Link href={`/offres/${offer.uid}`}>{offer.title}</Link>
         </h3>
-        <button type="button" className={styles.bookmark} aria-label="Epingler cette offre">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 4.5a1.5 1.5 0 0 1 1.5-1.5h7A1.5 1.5 0 0 1 17 4.5v16.2a.3.3 0 0 1-.5.23L12 16.76l-4.5 4.17a.3.3 0 0 1-.5-.23z" />
-          </svg>
-        </button>
+        <FavoriteButton uid={offer.uid} />
       </header>
       <p className={styles.date}>📅 {formatDate(offer.createdAt)}</p>
       <p className={styles.techs}>

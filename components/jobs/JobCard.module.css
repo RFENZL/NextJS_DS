@@ -25,26 +25,6 @@
   text-decoration: underline;
 }
 
-.bookmark {
-  border: 0;
-  background: transparent;
-  color: #293350;
-  padding: 0;
-  width: 22px;
-  height: 22px;
-  cursor: pointer;
-}
-
-.bookmark svg {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 .date {
   color: #2f63d8;
   font-size: 0.82rem;

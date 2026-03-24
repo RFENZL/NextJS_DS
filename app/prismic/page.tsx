@@ -14,7 +14,7 @@ export default async function PrismicPage() {
 
   try {
     const client = createClient();
-    const docs = await client.getAllByType('mention_legale', { pageSize: 1 });
+    const docs = await client.getAllByType('mentions', { pageSize: 1 });
     const doc = docs[0];
     const data = (doc?.data as Record<string, unknown>) ?? {};
     const title =
@@ -40,7 +40,7 @@ export default async function PrismicPage() {
     return (
       <main className={styles.page}>
         <h1>Document Prismic introuvable</h1>
-        <p>Cree et publie un document mention_legale dans Prismic.</p>
+        <p>Cree et publie un document mentions dans Prismic.</p>
       </main>
     );
   }
