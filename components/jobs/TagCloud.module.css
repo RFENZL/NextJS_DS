@@ -9,20 +9,20 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.78rem;
-  border: 1px solid #becbf7;
-  color: #17338a;
-  padding: 0.2rem 0.48rem;
-  background: #ffffff;
+  font-size: 0.82rem;
+  border: 1px solid #2f7ff0;
+  color: #2f7ff0;
+  padding: 0.18rem 0.54rem;
+  background: #f5f9ff;
 }
 
 .cloud li a span {
-  color: #4b66c3;
+  color: #2f7ff0;
   font-size: 0.7rem;
 }
 
 .cloud li a:hover {
-  background: #edf2ff;
+  background: #eaf3ff;
 }
 
 .empty {

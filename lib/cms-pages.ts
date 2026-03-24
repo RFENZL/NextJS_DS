@@ -5,6 +5,7 @@ type HomepageContent = {
   title: string;
   heroCaption: string;
   intro: string;
+  heroImageUrl: string;
 };
 
 type ListeContent = {
@@ -79,6 +80,11 @@ const getByUidData = async (type: string, uid: string) => {
 
 export const getHomepageContent = async (): Promise<HomepageContent> => {
   const data = await getSingletonData('homepage');
+  const heroImage =
+    data?.hero_image && typeof data.hero_image === 'object'
+      ? (data.hero_image as Record<string, unknown>)
+      : null;
+  const heroImageUrl = typeof heroImage?.url === 'string' ? heroImage.url : '';
 
   return {
     title: textFromField(data?.title) || 'Offres d emploi',
@@ -86,6 +92,7 @@ export const getHomepageContent = async (): Promise<HomepageContent> => {
     intro:
       textFromField(data?.intro) ||
       'Consultez les offres et accedez a la fiche detaillee de chaque poste.',
+    heroImageUrl,
   };
 };
 

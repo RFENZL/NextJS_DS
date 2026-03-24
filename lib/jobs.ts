@@ -81,6 +81,15 @@ const asText = (value: unknown): string => {
 const parseTechnologies = (data: Record<string, unknown>, tags: string[]) => {
   const fromFields: string[] = [];
 
+  const prettify = (value: string) =>
+    value
+      .replace(/[-_]+/g, ' ')
+      .trim()
+      .split(' ')
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
+
   const pushLinkTag = (raw: unknown) => {
     if (!raw || typeof raw !== 'object') {
       return;
@@ -88,17 +97,20 @@ const parseTechnologies = (data: Record<string, unknown>, tags: string[]) => {
 
     const link = raw as Record<string, unknown>;
     const uid = typeof link.uid === 'string' ? link.uid.trim() : '';
+    const slug =
+      typeof link.slug === 'string'
+        ? link.slug.trim()
+        : Array.isArray(link.slugs) && typeof link.slugs[0] === 'string'
+          ? link.slugs[0].trim()
+          : '';
+    const linkUrl = typeof link.url === 'string' ? link.url.trim() : '';
+    const urlLastPart = linkUrl.split('/').filter(Boolean).pop() ?? '';
     const linkedData =
       link.data && typeof link.data === 'object' ? (link.data as Record<string, unknown>) : null;
     const linkedTagName = linkedData
       ? asText(linkedData.tag_name) || asText(linkedData.title)
       : '';
-    const fallbackName = uid
-      ? uid
-          .split('-')
-          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-          .join(' ')
-      : '';
+    const fallbackName = prettify(uid || slug || urlLastPart);
     const finalName = linkedTagName || fallbackName;
 
     if (finalName) {
