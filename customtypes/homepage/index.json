@@ -20,31 +20,6 @@
           "label": "Image hero"
         }
       },
-      "hero_frame_enabled": {
-        "type": "Boolean",
-        "config": {
-          "label": "Afficher le cadre photo",
-          "default_value": false,
-          "false_value": "Non",
-          "true_value": "Oui"
-        }
-      },
-      "hero_frame_color": {
-        "type": "Color",
-        "config": {
-          "label": "Couleur du cadre",
-          "placeholder": "#1e90ff"
-        }
-      },
-      "hero_frame_width": {
-        "type": "Number",
-        "config": {
-          "label": "Epaisseur du cadre (px)",
-          "min": 1,
-          "max": 12,
-          "placeholder": "3"
-        }
-      },
       "hero_caption": {
         "type": "Text",
         "config": {

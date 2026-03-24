@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { CSSProperties } from 'react';
 import { JobGrid } from '@/components/jobs/JobGrid';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { getHomepageContent } from '@/lib/cms-pages';
@@ -9,18 +8,13 @@ import styles from './site.module.css';
 
 export default async function HomePage() {
   const [offers, homepage] = await Promise.all([getJobOffers(), getHomepageContent()]);
-  const heroStyle: CSSProperties | undefined = homepage.heroFrameEnabled
-    ? {
-        border: `${homepage.heroFrameWidth}px solid ${homepage.heroFrameColor}`,
-      }
-    : undefined;
 
   return (
     <div className={styles.page}>
       <SiteHeader />
       <main className={styles.container}>
-        {homepage.heroImageUrl ? (
-          <section className={styles.heroImageWrap} style={heroStyle}>
+        <section className={styles.heroImageWrap}>
+          {homepage.heroImageUrl ? (
             <Image
               src={homepage.heroImageUrl}
               alt="Hero"
@@ -29,8 +23,10 @@ export default async function HomePage() {
               className={styles.heroImage}
               unoptimized
             />
-          </section>
-        ) : null}
+          ) : (
+            <div className={styles.heroPlaceholder} />
+          )}
+        </section>
 
         <section className={styles.panel}>
           <h1 className={styles.sectionTitle}>{homepage.heroCaption}</h1>
