@@ -11,7 +11,6 @@ type ApplicationFormProps = {
 export function ApplicationForm({ offer }: ApplicationFormProps) {
   const [done, setDone] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
 
   return (
     <section className={styles.wrapper}>
@@ -20,7 +19,6 @@ export function ApplicationForm({ offer }: ApplicationFormProps) {
         className={styles.form}
         onSubmit={async (event) => {
           event.preventDefault();
-          setError('');
           setIsSubmitting(true);
 
           const formData = new FormData(event.currentTarget);
@@ -28,7 +26,7 @@ export function ApplicationForm({ offer }: ApplicationFormProps) {
           const message = String(formData.get('message') ?? '');
 
           try {
-            const response = await fetch('/api/candidature', {
+            await fetch('/api/candidature', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -41,16 +39,11 @@ export function ApplicationForm({ offer }: ApplicationFormProps) {
                 adminEmails: offer.adminEmails,
               }),
             });
-
-            if (!response.ok) {
-              throw new Error('Envoi impossible');
-            }
-
+          } catch {
+            console.info('Candidature email logic is simulated in this project.');
+          } finally {
             setDone(true);
             event.currentTarget.reset();
-          } catch {
-            setError('Une erreur est survenue pendant l envoi.');
-          } finally {
             setIsSubmitting(false);
           }
         }}
@@ -64,11 +57,11 @@ export function ApplicationForm({ offer }: ApplicationFormProps) {
         </button>
       </form>
 
-      {error ? <p className={styles.error}>{error}</p> : null}
+      <p className={styles.info}>La fonctionnalite email est fake mais fonctionnelle.</p>
 
       {done ? (
         <div className={styles.popup} role="status" aria-live="polite">
-          <p>Merci, votre candidature a bien ete enregistree.</p>
+          <p>Merci, la candidature est enregistree (envoi email simule).</p>
           <button type="button" onClick={() => setDone(false)}>
             Fermer
           </button>

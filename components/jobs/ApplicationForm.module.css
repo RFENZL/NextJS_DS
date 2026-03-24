@@ -45,8 +45,8 @@
   cursor: default;
 }
 
-.error {
-  color: #9a2032;
+.info {
+  color: #4b5f9d;
   font-size: 0.8rem;
 }
 
