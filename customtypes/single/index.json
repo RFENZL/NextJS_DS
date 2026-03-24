@@ -22,7 +22,7 @@
         }
       },
       "offre": {
-        "type": "ContentRelationship",
+        "type": "Link",
         "config": {
           "label": "Offre associee",
           "placeholder": "Selectionner une offre",
