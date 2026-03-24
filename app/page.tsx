@@ -1,18 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { JobGrid } from '@/components/jobs/JobGrid';
-import { TagCloud } from '@/components/jobs/TagCloud';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { getHomepageContent } from '@/lib/cms-pages';
-import { getJobOffers, getTechnologyCloud } from '@/lib/jobs';
+import { getJobOffers } from '@/lib/jobs';
 import styles from './site.module.css';
 
 export default async function HomePage() {
-  const [offers, tags, homepage] = await Promise.all([
-    getJobOffers(),
-    getTechnologyCloud(),
-    getHomepageContent(),
-  ]);
+  const [offers, homepage] = await Promise.all([getJobOffers(), getHomepageContent()]);
 
   return (
     <div className={styles.page}>
@@ -43,11 +38,6 @@ export default async function HomePage() {
               Voir toutes les offres
             </Link>
           </div>
-        </section>
-
-        <section className={styles.panel}>
-          <h2 className={styles.panelTitle}>Technologies</h2>
-          <TagCloud tags={tags} />
         </section>
       </main>
     </div>
