@@ -1,0 +1,32 @@
+{
+  "id": "mentions",
+  "label": "Mentions",
+  "format": "page",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Titre",
+          "single": "heading1",
+          "placeholder": "Mentions legales"
+        }
+      },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Contenu",
+          "multi": "heading2,heading3,paragraph,list-item,o-list-item,strong,em,hyperlink"
+        }
+      },
+      "updated_at": {
+        "type": "Date",
+        "config": {
+          "label": "Date de mise a jour"
+        }
+      }
+    }
+  }
+}

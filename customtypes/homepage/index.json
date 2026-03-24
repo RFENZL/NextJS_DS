@@ -1,0 +1,57 @@
+{
+  "id": "homepage",
+  "label": "Homepage",
+  "format": "page",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Titre",
+          "single": "heading1",
+          "placeholder": "Accueil"
+        }
+      },
+      "hero_image": {
+        "type": "Image",
+        "config": {
+          "label": "Image hero"
+        }
+      },
+      "hero_caption": {
+        "type": "Text",
+        "config": {
+          "label": "Legende hero",
+          "placeholder": "Nos dernieres opportunites"
+        }
+      },
+      "intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Introduction",
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "labels": {},
+          "choices": {
+            "hero": {
+              "type": "SharedSlice"
+            },
+            "offers_list": {
+              "type": "SharedSlice"
+            },
+            "text_block": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

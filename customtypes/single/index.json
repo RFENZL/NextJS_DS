@@ -1,0 +1,63 @@
+{
+  "id": "single",
+  "label": "Single",
+  "format": "page",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Titre",
+          "single": "heading1",
+          "placeholder": "Developpeur NextJS"
+        }
+      },
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID",
+          "placeholder": "developpeur-nextjs"
+        }
+      },
+      "offre": {
+        "type": "ContentRelationship",
+        "config": {
+          "label": "Offre associee",
+          "placeholder": "Selectionner une offre",
+          "select": "document",
+          "customtypes": [
+            "offre_emploi"
+          ]
+        }
+      },
+      "job_intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Texte introductif",
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "show_apply_form": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher le formulaire",
+          "default_value": true
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "labels": {},
+          "choices": {
+            "text_block": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

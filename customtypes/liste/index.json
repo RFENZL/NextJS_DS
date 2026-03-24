@@ -1,0 +1,48 @@
+{
+  "id": "liste",
+  "label": "Liste",
+  "format": "page",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Titre",
+          "single": "heading1",
+          "placeholder": "Offres d'emploi"
+        }
+      },
+      "intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Introduction",
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "show_tag_cloud": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher le nuage de tags",
+          "default_value": true
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "labels": {},
+          "choices": {
+            "offers_list": {
+              "type": "SharedSlice"
+            },
+            "text_block": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

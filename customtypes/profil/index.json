@@ -1,0 +1,62 @@
+{
+  "id": "profil",
+  "label": "Profil",
+  "format": "page",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Titre",
+          "single": "heading1",
+          "placeholder": "Bienvenue"
+        }
+      },
+      "intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Introduction",
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "saved_jobs_title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre bloc offres enregistrees",
+          "placeholder": "Offres enregistrees"
+        }
+      },
+      "history_title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre historique",
+          "placeholder": "Historique des candidatures"
+        }
+      },
+      "history_text": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Texte historique",
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "labels": {},
+          "choices": {
+            "offers_list": {
+              "type": "SharedSlice"
+            },
+            "text_block": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}
