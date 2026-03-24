@@ -81,6 +81,31 @@ const asText = (value: unknown): string => {
 const parseTechnologies = (data: Record<string, unknown>, tags: string[]) => {
   const fromFields: string[] = [];
 
+  const pushLinkTag = (raw: unknown) => {
+    if (!raw || typeof raw !== 'object') {
+      return;
+    }
+
+    const link = raw as Record<string, unknown>;
+    const uid = typeof link.uid === 'string' ? link.uid.trim() : '';
+    const linkedData =
+      link.data && typeof link.data === 'object' ? (link.data as Record<string, unknown>) : null;
+    const linkedTagName = linkedData
+      ? asText(linkedData.tag_name) || asText(linkedData.title)
+      : '';
+    const fallbackName = uid
+      ? uid
+          .split('-')
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(' ')
+      : '';
+    const finalName = linkedTagName || fallbackName;
+
+    if (finalName) {
+      fromFields.push(finalName);
+    }
+  };
+
   const candidateKeys = ['technologies', 'technology', 'tags', 'skills'];
 
   for (const key of candidateKeys) {
@@ -94,6 +119,9 @@ const parseTechnologies = (data: Record<string, unknown>, tags: string[]) => {
 
         if (item && typeof item === 'object') {
           const possibleObject = item as Record<string, unknown>;
+          pushLinkTag(possibleObject.tag);
+          pushLinkTag(possibleObject.technology);
+          pushLinkTag(possibleObject.skill);
           const textValue =
             asText(possibleObject.name) ||
             asText(possibleObject.technology) ||

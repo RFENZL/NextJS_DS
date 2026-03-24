@@ -64,11 +64,13 @@
         "config": {
           "label": "Technologies",
           "fields": {
-            "technology": {
-              "type": "Text",
+            "tag": {
+              "type": "Link",
               "config": {
-                "label": "Technologie",
-                "placeholder": "NextJS"
+                "label": "Tag",
+                "placeholder": "Choisir un tag",
+                "select": "document",
+                "customtypes": ["tag"]
               }
             }
           }
