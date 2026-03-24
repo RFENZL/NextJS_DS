@@ -1,5 +1,5 @@
 {
-  "repositoryName": "ton-repository-prismic",
+  "repositoryName": "NextJSDS",
   "adapter": "@slicemachine/adapter-next",
   "libraries": ["./slices"],
   "localSliceSimulatorURL": "http://localhost:3000/slice-simulator"
