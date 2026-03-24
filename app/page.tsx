@@ -69,10 +69,9 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-          Go to nextjs.org ->
+          Go to nextjs.org -&gt;
         </a>
       </footer>
     </div>
-    </main>
   );
 }
