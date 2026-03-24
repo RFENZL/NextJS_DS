@@ -1,6 +1,11 @@
 import * as prismic from '@prismicio/client';
 
-export const repositoryName = process.env.PRISMIC_REPOSITORY_NAME ?? '';
+const fallbackRepositoryName = 'nextjsds';
+
+export const repositoryName =
+  process.env.PRISMIC_REPOSITORY_NAME ??
+  process.env.NEXT_PUBLIC_PRISMIC_REPOSITORY_NAME ??
+  fallbackRepositoryName;
 
 const defaultFetchOptions = {
   next: {
