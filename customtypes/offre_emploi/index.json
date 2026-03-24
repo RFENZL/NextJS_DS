@@ -1,6 +1,6 @@
 {
-  "id": "job",
-  "label": "Job",
+  "id": "offre_emploi",
+  "label": "Offre d'emploi",
   "format": "custom",
   "repeatable": true,
   "status": true,

@@ -4,7 +4,7 @@ export const repositoryName = process.env.PRISMIC_REPOSITORY_NAME ?? '';
 
 const routes: prismic.ClientConfig['routes'] = [
   {
-    type: 'job',
+    type: 'offre_emploi',
     path: '/offres/:uid',
   },
 ];

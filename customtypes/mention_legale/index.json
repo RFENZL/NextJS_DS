@@ -1,0 +1,32 @@
+{
+  "id": "mention_legale",
+  "label": "Mention legale",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre",
+          "placeholder": "Mentions legales"
+        }
+      },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Contenu",
+          "placeholder": "Saisir les mentions legales",
+          "multi": "heading2,heading3,paragraph,list-item,o-list-item,strong,em,hyperlink"
+        }
+      },
+      "updated_at": {
+        "type": "Date",
+        "config": {
+          "label": "Date de mise a jour"
+        }
+      }
+    }
+  }
+}

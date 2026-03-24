@@ -145,7 +145,7 @@ export const getJobOffers = async (): Promise<JobOffer[]> => {
 
   try {
     const client = createClient();
-    const docs = await client.getAllByType('job');
+    const docs = await client.getAllByType('offre_emploi');
 
     if (docs.length === 0) {
       return fallbackOffers;
