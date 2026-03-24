@@ -1,0 +1,83 @@
+.page {
+  min-height: 100dvh;
+  background: #f1f3f9;
+}
+
+.container {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.1rem 0 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero {
+  border: 1px solid #c3cff4;
+  min-height: 140px;
+  background: linear-gradient(145deg, #ecf0fb, #dfe8ff);
+  display: grid;
+  align-items: end;
+  padding: 1rem;
+}
+
+.hero p {
+  font-size: 0.9rem;
+  color: #354786;
+}
+
+.panel {
+  border: 1px solid #c6d2f3;
+  background: #ffffff;
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.panelTitle {
+  color: #1a327f;
+  font-size: 1.06rem;
+  font-weight: 700;
+}
+
+.row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 2fr 1fr;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.topBar p {
+  color: #5a689e;
+  font-size: 0.82rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions a {
+  border: 1px solid #bfd0ff;
+  color: #21409c;
+  background: #f2f6ff;
+  padding: 0.24rem 0.45rem;
+  font-size: 0.75rem;
+}
+
+.article {
+  color: #1d2b58;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 850px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

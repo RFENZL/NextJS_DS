@@ -1,0 +1,59 @@
+.card {
+  border: 1px solid #cad2f3;
+  padding: 0.8rem;
+  background: #ffffff;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #15307f;
+}
+
+.title a:hover {
+  text-decoration: underline;
+}
+
+.contract {
+  font-size: 0.7rem;
+  color: #102660;
+  border: 1px solid #cdd7fb;
+  padding: 0.1rem 0.35rem;
+}
+
+.meta {
+  font-size: 0.76rem;
+  color: #6171a8;
+}
+
+.excerpt {
+  color: #2b3150;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tags a {
+  color: #2b4ecf;
+  border: 1px solid #ccd8fe;
+  font-size: 0.69rem;
+  padding: 0.08rem 0.35rem;
+}
+
+.tags a:hover {
+  background: #edf1ff;
+}

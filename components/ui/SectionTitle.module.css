@@ -1,0 +1,17 @@
+.wrapper {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.title {
+  color: #12266d;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #5a6280;
+  font-size: 0.96rem;
+  max-width: 65ch;
+}

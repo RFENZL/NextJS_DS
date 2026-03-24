@@ -1,0 +1,30 @@
+.cloud {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.cloud li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  border: 1px solid #becbf7;
+  color: #17338a;
+  padding: 0.2rem 0.48rem;
+  background: #ffffff;
+}
+
+.cloud li a span {
+  color: #4b66c3;
+  font-size: 0.7rem;
+}
+
+.cloud li a:hover {
+  background: #edf2ff;
+}
+
+.empty {
+  color: #6472a7;
+}
