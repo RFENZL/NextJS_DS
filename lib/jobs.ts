@@ -140,7 +140,7 @@ const normalizeOffer = (doc: PrismicDoc): JobOffer => {
 
 export const getJobOffers = async (): Promise<JobOffer[]> => {
   if (!repositoryName) {
-    return fallbackOffers;
+    return process.env.NODE_ENV === 'production' ? [] : fallbackOffers;
   }
 
   try {
@@ -148,12 +148,13 @@ export const getJobOffers = async (): Promise<JobOffer[]> => {
     const docs = await client.getAllByType('offre_emploi');
 
     if (docs.length === 0) {
-      return fallbackOffers;
+      return process.env.NODE_ENV === 'production' ? [] : fallbackOffers;
     }
 
     return docs.map((doc) => normalizeOffer(doc as PrismicDoc));
-  } catch {
-    return fallbackOffers;
+  } catch (error) {
+    console.error('Unable to fetch offre_emploi from Prismic:', error);
+    return process.env.NODE_ENV === 'production' ? [] : fallbackOffers;
   }
 };
 
