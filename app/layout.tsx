@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -16,7 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <body>
+        {children}
+        <footer className="siteFooter">
+          <Link href="/mentions" className="siteFooterLink">
+            Mentions legales
+          </Link>
+        </footer>
+      </body>
     </html>
   );
 }
