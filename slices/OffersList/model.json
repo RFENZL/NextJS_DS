@@ -1,0 +1,26 @@
+{
+  "id": "offers_list",
+  "type": "SharedSlice",
+  "name": "OffersList",
+  "description": "Liste des offres",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "Bloc listant les offres",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "Titre du bloc",
+            "single": "heading2"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

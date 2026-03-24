@@ -1,0 +1,26 @@
+{
+  "id": "text_block",
+  "type": "SharedSlice",
+  "name": "TextBlock",
+  "description": "Bloc de texte libre",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "Texte riche",
+      "primary": {
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Contenu",
+            "placeholder": "Saisir du contenu",
+            "multi": "heading2,heading3,paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

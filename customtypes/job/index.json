@@ -1,0 +1,79 @@
+{
+  "id": "job",
+  "label": "Job",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Titre",
+          "placeholder": "Developpeur Next.js",
+          "single": "heading1"
+        }
+      },
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID",
+          "placeholder": "developpeur-nextjs"
+        }
+      },
+      "excerpt": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Extrait",
+          "placeholder": "Resume court",
+          "multi": "paragraph,strong,em"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "Description complete",
+          "multi": "heading2,heading3,paragraph,list-item,o-list-item,strong,em,hyperlink"
+        }
+      },
+      "company": {
+        "type": "Text",
+        "config": {
+          "label": "Entreprise",
+          "placeholder": "Nom de l'entreprise"
+        }
+      },
+      "location": {
+        "type": "Text",
+        "config": {
+          "label": "Localisation",
+          "placeholder": "Paris / Remote"
+        }
+      },
+      "contract": {
+        "type": "Select",
+        "config": {
+          "label": "Contrat",
+          "placeholder": "Type de contrat",
+          "options": ["CDI", "CDD", "Freelance", "Stage", "Alternance"]
+        }
+      },
+      "technologies": {
+        "type": "Group",
+        "config": {
+          "label": "Technologies",
+          "fields": {
+            "technology": {
+              "type": "Text",
+              "config": {
+                "label": "Technologie",
+                "placeholder": "NextJS"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
