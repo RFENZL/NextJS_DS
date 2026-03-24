@@ -28,6 +28,13 @@
           "default_value": true
         }
       },
+      "page_size": {
+        "type": "Number",
+        "config": {
+          "label": "Nombre d'offres par page",
+          "placeholder": "9"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

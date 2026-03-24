@@ -28,6 +28,23 @@
           "placeholder": "Offres enregistrees"
         }
       },
+      "pinned_offers": {
+        "type": "Group",
+        "config": {
+          "label": "Offres pinees",
+          "fields": {
+            "offer": {
+              "type": "Link",
+              "config": {
+                "label": "Offre",
+                "placeholder": "Selectionner une offre",
+                "select": "document",
+                "customtypes": ["offre_emploi"]
+              }
+            }
+          }
+        }
+      },
       "history_title": {
         "type": "Text",
         "config": {

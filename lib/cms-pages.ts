@@ -10,6 +10,7 @@ type HomepageContent = {
 type ListeContent = {
   title: string;
   intro: string;
+  pageSize: number;
 };
 
 type ProfilContent = {
@@ -18,11 +19,22 @@ type ProfilContent = {
   savedJobsTitle: string;
   historyTitle: string;
   historyText: string;
+  pinnedOfferUids: string[];
 };
 
 type MentionsContent = {
   title: string;
   contentParagraphs: string[];
+};
+
+type TagPageContent = {
+  title: string;
+  intro: string;
+};
+
+type SinglePageContent = {
+  intro: string;
+  showApplyForm: boolean;
 };
 
 const textFromField = (value: unknown) => {
@@ -51,6 +63,20 @@ const getSingletonData = async (type: string) => {
   }
 };
 
+const getByUidData = async (type: string, uid: string) => {
+  if (!repositoryName) {
+    return null;
+  }
+
+  try {
+    const client = createClient();
+    const doc = await client.getByUID(type as any, uid);
+    return (doc?.data as Record<string, unknown>) ?? null;
+  } catch {
+    return null;
+  }
+};
+
 export const getHomepageContent = async (): Promise<HomepageContent> => {
   const data = await getSingletonData('homepage');
 
@@ -65,15 +91,42 @@ export const getHomepageContent = async (): Promise<HomepageContent> => {
 
 export const getListeContent = async (): Promise<ListeContent> => {
   const data = await getSingletonData('liste');
+  const pageSizeRaw = data?.page_size;
+  const pageSize = typeof pageSizeRaw === 'number' && Number.isFinite(pageSizeRaw)
+    ? Math.max(1, Math.min(50, Math.round(pageSizeRaw)))
+    : 9;
 
   return {
     title: textFromField(data?.title) || 'Offres d emploi',
     intro: textFromField(data?.intro) || 'Toutes les annonces administrees dans Prismic.',
+    pageSize,
   };
 };
 
 export const getProfilContent = async (): Promise<ProfilContent> => {
   const data = await getSingletonData('profil');
+  const pinnedOfferUids: string[] = [];
+  const pinnedRaw = data?.pinned_offers;
+
+  if (Array.isArray(pinnedRaw)) {
+    for (const item of pinnedRaw) {
+      if (!item || typeof item !== 'object') {
+        continue;
+      }
+
+      const objectValue = item as Record<string, unknown>;
+      const rawLink = objectValue.offer;
+
+      if (rawLink && typeof rawLink === 'object') {
+        const linkValue = rawLink as Record<string, unknown>;
+        const uid = typeof linkValue.uid === 'string' ? linkValue.uid : '';
+
+        if (uid) {
+          pinnedOfferUids.push(uid);
+        }
+      }
+    }
+  }
 
   return {
     title: textFromField(data?.title) || 'Bienvenue',
@@ -83,6 +136,7 @@ export const getProfilContent = async (): Promise<ProfilContent> => {
     historyText:
       textFromField(data?.history_text) ||
       'Vos envois de candidature s afficheront ici apres la connexion du module backend.',
+    pinnedOfferUids: [...new Set(pinnedOfferUids)],
   };
 };
 
@@ -98,5 +152,23 @@ export const getMentionsContent = async (): Promise<MentionsContent> => {
           'Ce site est un projet pedagogique de gestion d offres d emploi. Les contenus affiches sont fournis a titre d exercice.',
           'Editeur: Projet NextJS DS - Hebergement: Vercel - Donnees emploi: Prismic.',
         ],
+  };
+};
+
+export const getTagPageContent = async (uid: string): Promise<TagPageContent> => {
+  const data = await getByUidData('tag', uid);
+
+  return {
+    title: textFromField(data?.title) || `Techno ${uid}`,
+    intro: textFromField(data?.intro) || 'Offres reliees a cette technologie.',
+  };
+};
+
+export const getSinglePageContent = async (uid: string): Promise<SinglePageContent> => {
+  const data = await getByUidData('single', uid);
+
+  return {
+    intro: textFromField(data?.job_intro),
+    showApplyForm: data?.show_apply_form !== false,
   };
 };

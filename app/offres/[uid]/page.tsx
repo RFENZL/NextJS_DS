@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { ApplicationForm } from '@/components/jobs/ApplicationForm';
 import { SiteHeader } from '@/components/layout/SiteHeader';
+import { getSinglePageContent } from '@/lib/cms-pages';
 import { getJobByUid } from '@/lib/jobs';
 import styles from '../../site.module.css';
 
@@ -10,7 +11,7 @@ type JobDetailProps = {
 
 export default async function JobDetailPage({ params }: JobDetailProps) {
   const { uid } = await params;
-  const offer = await getJobByUid(uid);
+  const [offer, singlePage] = await Promise.all([getJobByUid(uid), getSinglePageContent(uid)]);
 
   if (!offer) {
     notFound();
@@ -25,10 +26,11 @@ export default async function JobDetailPage({ params }: JobDetailProps) {
           <p className={styles.article}>
             {offer.company} - {offer.location} - {offer.contract}
           </p>
+          {singlePage.intro ? <p className={styles.article}>{singlePage.intro}</p> : null}
           <p className={styles.article}>{offer.description}</p>
         </section>
 
-        <ApplicationForm />
+        {singlePage.showApplyForm ? <ApplicationForm offer={offer} /> : null}
       </main>
     </div>
   );

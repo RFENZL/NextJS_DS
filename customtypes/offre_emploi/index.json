@@ -73,6 +73,21 @@
             }
           }
         }
+      },
+      "admin_emails": {
+        "type": "Group",
+        "config": {
+          "label": "Emails administrateurs",
+          "fields": {
+            "email": {
+              "type": "Text",
+              "config": {
+                "label": "Email",
+                "placeholder": "recrutement@example.com"
+              }
+            }
+          }
+        }
       }
     }
   }

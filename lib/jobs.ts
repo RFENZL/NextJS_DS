@@ -11,6 +11,7 @@ export type JobOffer = {
   excerpt: string;
   description: string;
   technologies: string[];
+  adminEmails: string[];
   createdAt: string;
 };
 
@@ -26,6 +27,7 @@ const fallbackOffers: JobOffer[] = [
     description:
       'Vous rejoignez une equipe produit pour construire une plateforme emploi moderne. Vous travaillez sur l App Router, l accessibilite et l integration CMS.',
     technologies: ['NextJS', 'TypeScript', 'Prismic'],
+    adminEmails: ['recrutement@devy.example'],
     createdAt: '2026-03-20',
   },
   {
@@ -39,6 +41,7 @@ const fallbackOffers: JobOffer[] = [
     description:
       'Le poste couvre la conception de composants reutilisables, la qualite de code et la collaboration avec le design sur une maquette Figma.',
     technologies: ['React', 'TypeScript', 'CSS'],
+    adminEmails: ['jobs@studio-front.example'],
     createdAt: '2026-03-18',
   },
   {
@@ -52,9 +55,12 @@ const fallbackOffers: JobOffer[] = [
     description:
       'Vous intervenez sur l ensemble de la chaine: modelisation de contenus Prismic, pages dynamiques et publication continue sur Vercel.',
     technologies: ['NextJS', 'Node.js', 'Prismic'],
+    adminEmails: ['careers@apimakers.example'],
     createdAt: '2026-03-15',
   },
 ];
+
+const isEmailLike = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 const asText = (value: unknown): string => {
   if (typeof value === 'string') {
@@ -109,6 +115,46 @@ const parseTechnologies = (data: Record<string, unknown>, tags: string[]) => {
   return [...new Set([...tags, ...fromFields])];
 };
 
+const parseAdminEmails = (data: Record<string, unknown>) => {
+  const values: string[] = [];
+  const candidateKeys = ['admin_emails', 'admins', 'emails_admin', 'recruiters'];
+
+  for (const key of candidateKeys) {
+    const value = data[key];
+
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        if (typeof item === 'string' && isEmailLike(item.trim())) {
+          values.push(item.trim());
+        }
+
+        if (item && typeof item === 'object') {
+          const objectValue = item as Record<string, unknown>;
+          const rawEmail =
+            asText(objectValue.email) ||
+            asText(objectValue.admin_email) ||
+            asText(objectValue.value);
+
+          if (rawEmail && isEmailLike(rawEmail.trim())) {
+            values.push(rawEmail.trim());
+          }
+        }
+      }
+    }
+
+    if (typeof value === 'string') {
+      const parts = value.split(',').map((part) => part.trim()).filter(Boolean);
+      for (const part of parts) {
+        if (isEmailLike(part)) {
+          values.push(part);
+        }
+      }
+    }
+  }
+
+  return [...new Set(values)];
+};
+
 type PrismicDoc = prismic.PrismicDocument;
 
 const normalizeOffer = (doc: PrismicDoc): JobOffer => {
@@ -123,6 +169,7 @@ const normalizeOffer = (doc: PrismicDoc): JobOffer => {
   const location = asText(data.location) || asText(data.city) || 'Non renseigne';
   const contract = asText(data.contract) || asText(data.contract_type) || 'CDI';
   const technologies = parseTechnologies(data, doc.tags ?? []);
+  const adminEmails = parseAdminEmails(data);
 
   return {
     id: doc.id,
@@ -134,6 +181,7 @@ const normalizeOffer = (doc: PrismicDoc): JobOffer => {
     excerpt,
     description,
     technologies,
+    adminEmails,
     createdAt: doc.first_publication_date ?? new Date().toISOString(),
   };
 };
@@ -151,7 +199,9 @@ export const getJobOffers = async (): Promise<JobOffer[]> => {
       return process.env.NODE_ENV === 'production' ? [] : fallbackOffers;
     }
 
-    return docs.map((doc) => normalizeOffer(doc as PrismicDoc));
+    return docs
+      .map((doc) => normalizeOffer(doc as PrismicDoc))
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   } catch (error) {
     console.error('Unable to fetch offre_emploi from Prismic:', error);
     return process.env.NODE_ENV === 'production' ? [] : fallbackOffers;
@@ -195,4 +245,33 @@ export const getOffersByTechnology = async (rawTag: string) => {
   return offers.filter((offer) =>
     offer.technologies.some((tech) => tech.toLowerCase() === tag),
   );
+};
+
+export const getOffersByUids = async (uids: string[]) => {
+  if (uids.length === 0) {
+    return [];
+  }
+
+  const set = new Set(uids.map((uid) => uid.toLowerCase()));
+  const offers = await getJobOffers();
+
+  return offers.filter((offer) => set.has(offer.uid.toLowerCase()));
+};
+
+export const getOffersPage = async (page: number, pageSize: number) => {
+  const offers = await getJobOffers();
+  const safePageSize = Math.max(1, pageSize);
+  const total = offers.length;
+  const pageCount = Math.max(1, Math.ceil(total / safePageSize));
+  const currentPage = Math.min(Math.max(1, page), pageCount);
+  const start = (currentPage - 1) * safePageSize;
+  const paginatedOffers = offers.slice(start, start + safePageSize);
+
+  return {
+    offers: paginatedOffers,
+    total,
+    page: currentPage,
+    pageCount,
+    pageSize: safePageSize,
+  };
 };
