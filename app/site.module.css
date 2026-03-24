@@ -12,8 +12,8 @@
 }
 
 .heroImageWrap {
-  border: 1px solid #8dc5ff;
-  background: #ffffff;
+  border: 0;
+  background: transparent;
 }
 
 .heroImage {

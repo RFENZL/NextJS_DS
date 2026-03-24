@@ -18,8 +18,8 @@ export default async function HomePage() {
     <div className={styles.page}>
       <SiteHeader />
       <main className={styles.container}>
-        <section className={styles.heroImageWrap}>
-          {homepage.heroImageUrl ? (
+        {homepage.heroImageUrl ? (
+          <section className={styles.heroImageWrap}>
             <Image
               src={homepage.heroImageUrl}
               alt="Hero"
@@ -28,10 +28,8 @@ export default async function HomePage() {
               className={styles.heroImage}
               unoptimized
             />
-          ) : (
-            <div className={styles.heroPlaceholder} />
-          )}
-        </section>
+          </section>
+        ) : null}
 
         <section className={styles.panel}>
           <h1 className={styles.sectionTitle}>{homepage.heroCaption}</h1>
