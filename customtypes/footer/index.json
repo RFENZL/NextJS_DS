@@ -1,0 +1,48 @@
+{
+  "id": "footer",
+  "label": "Footer",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre footer",
+          "placeholder": "Informations"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "Texte de pied de page",
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "links": {
+        "type": "Group",
+        "config": {
+          "label": "Liens",
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": "Mentions"
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Lien",
+                "placeholder": "Choisir un lien"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

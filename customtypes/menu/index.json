@@ -1,0 +1,40 @@
+{
+  "id": "menu",
+  "label": "Menu",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "logo_text": {
+        "type": "Text",
+        "config": {
+          "label": "Texte logo",
+          "placeholder": "DEV"
+        }
+      },
+      "items": {
+        "type": "Group",
+        "config": {
+          "label": "Liens du menu",
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": "Accueil"
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Lien",
+                "placeholder": "Choisir un lien"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
