@@ -1,0 +1,12 @@
+.section {
+  border: 1px solid #c6d2f3;
+  background: #ffffff;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.title {
+  color: #1a327f;
+  font-size: 1.15rem;
+}

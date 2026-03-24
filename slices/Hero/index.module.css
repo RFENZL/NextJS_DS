@@ -1,0 +1,18 @@
+.hero {
+  background: linear-gradient(145deg, #edf2ff, #dfe8ff);
+  border: 1px solid #c8d4fb;
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.title {
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  color: #122b75;
+  line-height: 1.05;
+}
+
+.subtitle {
+  color: #3b4a7f;
+  max-width: 62ch;
+}
