@@ -22,6 +22,7 @@ export default async function HomePage() {
               height={500}
               className={styles.heroImage}
               unoptimized
+              priority
             />
           ) : (
             <div className={styles.heroPlaceholder} />
