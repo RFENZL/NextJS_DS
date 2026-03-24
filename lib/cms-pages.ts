@@ -6,6 +6,9 @@ type HomepageContent = {
   heroCaption: string;
   intro: string;
   heroImageUrl: string;
+  heroFrameEnabled: boolean;
+  heroFrameColor: string;
+  heroFrameWidth: number;
 };
 
 type ListeContent = {
@@ -85,6 +88,14 @@ export const getHomepageContent = async (): Promise<HomepageContent> => {
       ? (data.hero_image as Record<string, unknown>)
       : null;
   const heroImageUrl = typeof heroImage?.url === 'string' ? heroImage.url : '';
+  const heroFrameEnabled = data?.hero_frame_enabled === true;
+  const heroFrameColorRaw = typeof data?.hero_frame_color === 'string' ? data.hero_frame_color : '';
+  const heroFrameColor = heroFrameColorRaw.trim() || '#1e90ff';
+  const heroFrameWidthRaw = data?.hero_frame_width;
+  const heroFrameWidth =
+    typeof heroFrameWidthRaw === 'number' && Number.isFinite(heroFrameWidthRaw)
+      ? Math.max(1, Math.min(12, Math.round(heroFrameWidthRaw)))
+      : 3;
 
   return {
     title: textFromField(data?.title) || 'Offres d emploi',
@@ -93,6 +104,9 @@ export const getHomepageContent = async (): Promise<HomepageContent> => {
       textFromField(data?.intro) ||
       'Consultez les offres et accedez a la fiche detaillee de chaque poste.',
     heroImageUrl,
+    heroFrameEnabled,
+    heroFrameColor,
+    heroFrameWidth,
   };
 };
 
